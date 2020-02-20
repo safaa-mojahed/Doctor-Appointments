@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/safaa-mojahed/Doctor-Appointments/issues"
   },
-  "homepage": "https://github.com/safaa-mojahed/Doctor-Appointments#readme"
+  "homepage": "https://github.com/safaa-mojahed/Doctor-Appointments#readme",
+  "dependencies": {
+    "handlebars": "^4.7.3",
+    "hbs": "^4.1.0",
+    "mongodb": "^3.5.3"
+  }
 }
