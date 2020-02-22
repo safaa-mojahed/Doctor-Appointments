@@ -17,10 +17,18 @@ MongoClient.connect(url, function(err, database) {
       database.close();
   });
 
-  var user = { fullName: "Safaa-Mujahed", username: "Admin", password: "Admin" };
-  dbobject.collection("users").insertOne(user, function(err, res) {
-    if (err) throw err;
-    console.log("1 document inserted");
+ 
+  dbobject.collection("users").count(function (err, res) {
+    if (err)
+        throw err;
+    if(res == 0) {
+      var user = { fullName: "Safaa-Mujahed", username: "Admin", password: "Admin" };
+      dbobject.collection("users").insertOne(user, function(err, res) {
+        if (err) throw err;
+        console.log("1 document inserted");
+        database.close();
+      });
+    }
     database.close();
   });
 
