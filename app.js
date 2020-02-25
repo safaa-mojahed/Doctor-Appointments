@@ -26,21 +26,13 @@ let User = require('./models/user');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-// //Home Route
-// app.get('/', function(req, res) {
-//     res.render('home');
-// });
-
 // Home Route
 app.get('/', function(req, res){
     User.find({}, function(err, user){
       if(err){
         console.log(err);
       } else {
-        // res.render('index');
-        // console.log(user);
-        // res.send('user');
-        res.send(user);
+        res.render('home');
       }
     });
   });
