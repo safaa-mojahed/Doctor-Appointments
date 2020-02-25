@@ -1,31 +1,49 @@
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
+const config = require('./config/database');
 
-mongoose.connect('mongod://localhost/clinic');
+mongoose.connect(config.database);
 let database = mongoose.connection;
 
 // Check connection
-db.once('open', function(){
+database.once('open', function(){
     console.log('Connected to MongoDB');
   });
   
   // Check for DB errors
-  db.on('error', function(err){
+  database.on('error', function(err){
     console.log(err);
   });
 
 // intiate App
 const app = express();
 
+// Bring in Models
+let User = require('./models/user');
+
 //load view Engines
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-//Home Route
-app.get('/', function(req, res) {
-    res.render('home');
-});
+// //Home Route
+// app.get('/', function(req, res) {
+//     res.render('home');
+// });
+
+// Home Route
+app.get('/', function(req, res){
+    User.find({}, function(err, user){
+      if(err){
+        console.log(err);
+      } else {
+        // res.render('index');
+        // console.log(user);
+        // res.send('user');
+        res.send(user);
+      }
+    });
+  });
 
 //start server
 app.listen(3000, function() {
